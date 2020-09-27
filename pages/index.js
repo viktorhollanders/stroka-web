@@ -20,6 +20,7 @@ export default function Home() {
           <h1 className="logo-text">STROKA</h1>
 
           <div className="openingHouers">
+            <p>Opið</p>
             <p>
               Mánudag <strong>11–14</strong> og <strong>16–17</strong>
             </p>
@@ -30,8 +31,8 @@ export default function Home() {
         </header>
 
         <p className="text">
-          Við erum að setja nýa vefsíðu í loftið vef verslunin verður óvirk á
-          meðal en hér að neðan er hægt að finna helstu upplýsingar um Stroku.
+          Við erum að setja nýja vefsíðu í loftið. Vef verslunin verður óvirk á
+          meðan en hér að neðan er hægt að finna helstu upplýsingar um Stroku.
         </p>
 
         <footer>
