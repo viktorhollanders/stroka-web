@@ -49,14 +49,18 @@ export default function Home() {
             <div className="contact-item">
               <h3 className="contact-title">Fylgstu með</h3>
               <div className="contact-images">
-                <img
-                  className="contact-image"
-                  src="/images/stroka facebook.png"
-                />
-                <img
-                  className="contact-image"
-                  src="/images/stroka instagram.png"
-                />
+                <a href="https://www.facebook.com/stroka.is/" target="_blank">
+                  <img
+                    className="contact-image"
+                    src="/images/stroka facebook.png"
+                  />
+                </a>
+                <a href="https://www.instagram.com/stroka.is/" target="_blank">
+                  <img
+                    className="contact-image"
+                    src="/images/stroka instagram.png"
+                  />
+                </a>
               </div>
             </div>
           </div>
