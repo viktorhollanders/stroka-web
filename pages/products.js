@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Image from "next/image";
 import Prismic from "prismic-javascript";
 import { RichText } from "prismic-reactjs";
 
@@ -10,27 +11,19 @@ export default function Products({ products }) {
       <div>
         {products.map((product) => (
           <article key={product.id}>
+            <Image
+              src={product.data.images[0].image.url}
+              width={100}
+              height={100}
+            />
             {RichText.asText(product.data.title)}
+            <p>Verð {product.data.price}kr</p>
           </article>
         ))}
       </div>
     </section>
   );
 }
-
-// async function data() {
-//   const apiEndpoint = "https://stroka.cdn.prismic.io/api/v2";
-//   const client = Prismic.client(apiEndpoint);
-
-//   const response = await client.query(
-//     Prismic.Predicates("document-type", "product"),
-//     { orderings: "[product desc]" }
-//   );
-//   console.log(data);
-//   if (response) {
-//     return data;
-//   }
-// }
 
 export async function getServerSideProps() {
   const apiEndpoint = "https://stroka.cdn.prismic.io/api/v2";
