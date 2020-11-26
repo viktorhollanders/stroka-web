@@ -35,6 +35,8 @@ export default function Home() {
           display: flex;
           flex-direction: column;
           align-items: center;
+
+          margin-top: 138px;
         }
 
         .logo__image {

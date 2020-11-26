@@ -9,15 +9,15 @@ export default function Nav() {
           <h1 className="header__logo-text">STROKA</h1>
         </Link>
 
-        <nav className="headerNav">
+        <nav className="header-nav">
           <Link href="/products">
-            <a className="headerNav__item">Vörur</a>
+            <a className="header-nav__item">Vörur</a>
           </Link>
           <Link href="/">
-            <a className="headerNav__item">Meðferðir</a>
+            <a className="header-nav__item">Meðferðir</a>
           </Link>
           <Link href="/">
-            <a className="headerNav__item">Um Stroku</a>
+            <a className="header-nav__item">Um Stroku</a>
           </Link>
         </nav>
       </header>
@@ -45,7 +45,7 @@ export default function Nav() {
           color: #5b2e03;
         }
 
-        .headerNav {
+        .header-nav {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
@@ -53,7 +53,7 @@ export default function Nav() {
           padding: 16px 0 9px 0;
         }
 
-        .headerNav__item {
+        .header-nav__item {
           font-size: 14px;
           font-weight: 600;
           color: #5b2e03;
