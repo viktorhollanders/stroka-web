@@ -44,8 +44,8 @@ export default function Home() {
             </div>
             <div className="contact-item">
               <h3 className="contact-title">Hafa samband</h3>
-              <p className="contact-text">S: 699-3096</p>
-              <a src="mailto:stroka.mail@gmail.com">stroka.mail@gmail.com</a>
+              <a href="tel:6993095">S: 699-3095</a>
+              <a href="mailto:stroka.mail@gmail.com">stroka.mail@gmail.com</a>
             </div>
             <div className="contact-item">
               <h3 className="contact-title">Fylgstu með</h3>
@@ -128,6 +128,11 @@ export default function Home() {
             margin-bottom: 30px;
             max-width: 200px;
             text-align: center;
+          }
+
+          .contact-item a {
+            display: block;
+            margin-bottom: 22px;
           }
 
           .contact-title {
