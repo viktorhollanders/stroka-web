@@ -12,7 +12,7 @@ export default function Home() {
       <Header />
       <main>
         <div className="hero">
-          <div className="hero-log_wrapper">
+          <div className="hero-logo_wrapper">
             <img className="logo__image" src="/images/logo.png" />
             <h1 className="logo__text">STROKA</h1>
           </div>
@@ -37,6 +37,13 @@ export default function Home() {
           align-items: center;
 
           margin-top: 138px;
+        }
+
+        .hero-logo_wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
         }
 
         .logo__image {
