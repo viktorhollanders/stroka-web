@@ -11,10 +11,9 @@ export default function Products({ products }) {
       <div>
         {products.map((product) => (
           <article key={product.id}>
-            <Image
+            <img
               src={product.data.images[0].image.url}
-              width={100}
-              height={100}
+              alt={product.data.title}
             />
             {RichText.asText(product.data.title)}
             <p>Verð {product.data.price}kr</p>
