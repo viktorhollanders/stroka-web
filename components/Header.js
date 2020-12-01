@@ -24,14 +24,15 @@ export default function Nav() {
 
       <style jsx>{`
         header {
-          position: fixed;
           width: 100vw;
           background-color: #fff;
+          padding: 48px 24px 0px 24px;
+          box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
+
+          position: fixed;
           z-index: 1;
           top: 0;
           left: 0;
-
-          padding: 48px 24px 0px 24px;
         }
 
         .header__logo-text {
@@ -57,6 +58,25 @@ export default function Nav() {
           font-size: 14px;
           font-weight: 600;
           color: #5b2e03;
+        }
+
+        @media screen and (min-width: 500px) {
+          header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 45px 40px;
+          }
+
+          .header-nav {
+            padding: 0;
+          }
+
+          .header-nav__item {
+            padding: 0 0 0 32px;
+          }
         }
       `}</style>
     </div>
