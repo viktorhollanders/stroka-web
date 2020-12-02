@@ -41,6 +41,10 @@ export default function Nav() {
           margin: 0;
         }
 
+        .header__logo-text:hover {
+          cursor: pointer;
+        }
+
         .header__logo-text {
           font-family: "Waldorf-skrift";
           color: #5b2e03;
