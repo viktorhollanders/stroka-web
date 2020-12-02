@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 
 export default function Home() {
   return (
-    <div id="__next">
+    <div>
       <Head>
         <title>Stroka</title>
         <link rel="icon" href="/favicon.ico" />
@@ -12,8 +12,8 @@ export default function Home() {
       <Header />
       <main>
         <div className="hero">
-          <div className="hero-logo_wrapper">
-            <img className="logo__image" src="/images/logo.png" />
+          <div className="hero-logo__wrapper">
+            <img className="logo__image" src="/images/stroka-logo.svg" />
             <h1 className="logo__text">STROKA</h1>
           </div>
 
@@ -39,7 +39,7 @@ export default function Home() {
           margin-top: 138px;
         }
 
-        .hero-logo_wrapper {
+        .hero-logo__wrapper {
           display: flex;
           flex-direction: column;
           align-items: center;
