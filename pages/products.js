@@ -3,9 +3,8 @@ import Head from "next/head";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { RichText } from "prismic-reactjs";
-import Link from "next/link";
 
-function Products({ products, catagotys }) {
+function Products({ products }) {
   return (
     <div>
       <Head>
@@ -20,11 +19,11 @@ function Products({ products, catagotys }) {
             <img className="logo__image" src="/images/products-logo.svg" />
             <h1 className="logo__text">Products</h1>
           </div>
-        </div>
 
-        <div className="hero-products__wrapper">
-          <p>Hægt er að ná í vörur í búðina</p>
-          <p>eða fá þær sent heim</p>
+          <div className="hero-products__wrapper">
+            <p>Hægt er að ná í vörur í búðina</p>
+            <p>eða fá þær sent heim</p>
+          </div>
         </div>
 
         <section className="products">
@@ -53,15 +52,23 @@ function Products({ products, catagotys }) {
           margin-top: 138px;
         }
 
-        .hero-products__wrapper {
+        .hero {
+          padding-top: 134px;
+        }
+
+        .hero-logo__wrapper {
           display: flex;
           flex-direction: column;
           align-items: center;
         }
 
-        .hero-products__wrapper p {
+        .hero-products__wrapper {
           font-size: 16px;
           margin: 0 0 16px 0;
+
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
 
         .logo__image {
@@ -73,10 +80,16 @@ function Products({ products, catagotys }) {
           font-family: "Waldorf-skrift";
           text-align: center;
           color: #5b2e03;
+          margin: 43px 0 0 0;
         }
 
-        .hero-openingHouers_wrapper p {
+        .hero-products__wrapper {
+          margin-top: 134px;
+        }
+
+        .hero-products__wrapper p {
           text-align: center;
+          margin: 0 0 16px 0;
         }
 
         /* producs */
@@ -84,6 +97,7 @@ function Products({ products, catagotys }) {
         .products {
           display: grid;
           grid-template-columns: 1fr 1fr;
+          grid-gap: 13px;
         }
 
         .product {
@@ -95,7 +109,6 @@ function Products({ products, catagotys }) {
           box-shadow: 0px 4px 40px rgba(91, 46, 3, 0.11);
           border-radius: 15px;
           padding: 16px;
-          margin: 13px;
         }
 
         .product__image {
@@ -118,27 +131,23 @@ function Products({ products, catagotys }) {
           margin: 0;
         }
 
-        @media screen and (min-width: 760px) {
+        @media screen and (min-width: 500px) {
+          .products {
+            grid-gap: 40px;
+          }
+        }
+
+        @media screen and (min-width: 600px) {
           .products {
             grid-template-columns: 1fr 1fr 1fr;
-          }
-          .product {
-            margin: 20px 40px;
+            grid-gap: 40px;
           }
         }
 
         @media screen and (min-width: 1000px) {
           .products {
             grid-template-columns: 1fr 1fr 1fr 1fr;
-          }
-          .product {
-            margin: 20px 40px;
-          }
-        }
-
-        @media screen and (min-width: 1200px) {
-          .product {
-            margin: 40px 80px;
+            grid-gap: 60px;
           }
         }
       `}</style>
@@ -155,14 +164,9 @@ export async function getServerSideProps() {
     { pageSize: 300 }
   );
 
-  const catagoryResponse = await client.query(
-    Prismic.Predicates.at("document.type", "catagory")
-  );
-
   return {
     props: {
       products: productsResponse.results,
-      catagotys: catagoryResponse.results,
     },
   };
 }

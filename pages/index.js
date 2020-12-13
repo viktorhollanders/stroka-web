@@ -1,8 +1,9 @@
 import Head from "next/head";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import ProductBanner from "../components/ProductBanner";
 
-export default function Home() {
+function Home() {
   return (
     <div>
       <Head>
@@ -11,22 +12,23 @@ export default function Home() {
       </Head>
       <Header />
       <main>
-        <div className="hero">
+        <section className="hero">
           <div className="hero-logo__wrapper">
             <img className="logo__image" src="/images/stroka-logo.svg" />
             <h1 className="logo__text">STROKA</h1>
-          </div>
 
-          <div className="hero-openingHouers_wrapper">
-            <p>Opið</p>
-            <p>
-              Mánudag <strong>11–14</strong> og <strong>16–17</strong>
-            </p>
-            <p>
-              Miðvikudag <strong>11–14</strong>
-            </p>
+            <div className="hero-openingHouers_wrapper">
+              <p>
+                Mánudag <strong>11–14</strong> og <strong>16–17</strong>
+              </p>
+              <p>
+                Miðvikudag <strong>11–14</strong>
+              </p>
+            </div>
           </div>
-        </div>
+        </section>
+
+        <ProductBanner />
       </main>
       <Footer />
 
@@ -39,11 +41,14 @@ export default function Home() {
           margin-top: 138px;
         }
 
+        .hero {
+          padding-top: 100px;
+        }
+
         .hero-logo__wrapper {
           display: flex;
           flex-direction: column;
           align-items: center;
-
         }
 
         .logo__image {
@@ -55,12 +60,20 @@ export default function Home() {
           font-family: "Waldorf-skrift";
           text-align: center;
           color: #5b2e03;
+          margin: 43px 0 0 0;
+        }
+
+        .hero-openingHouers_wrapper {
+          margin-top: 134px;
         }
 
         .hero-openingHouers_wrapper p {
           text-align: center;
+          margin: 0 0 16px 0;
         }
       `}</style>
     </div>
   );
 }
+
+export default Home;
