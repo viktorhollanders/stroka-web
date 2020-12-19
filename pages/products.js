@@ -1,8 +1,11 @@
 import Prismic from "prismic-javascript";
+import { client } from "../prismic-configuration";
+import { RichText } from "prismic-reactjs";
+import Link from "next/link";
+
 import Head from "next/head";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { RichText } from "prismic-reactjs";
 
 function Products({ products }) {
   return (
@@ -28,17 +31,19 @@ function Products({ products }) {
 
         <section className="products">
           {products.map((product) => (
-            <article className="product" key={product.id}>
-              <img
-                className="product__image"
-                src={product.data.images[0].image.url}
-                alt={product.data.title}
-              />
-              <h1 className="product__price">{product.data.price} .kr</h1>
-              <p className="product__title">
-                {RichText.asText(product.data.title)}
-              </p>
-            </article>
+            <Link href={`/products/${product.uid}`}>
+              <article className="product" key={product.id}>
+                <img
+                  className="product__image"
+                  src={product.data.images[0].image.url}
+                  alt={product.data.title}
+                />
+                <h1 className="product__price">{product.data.price} .kr</h1>
+                <p className="product__title">
+                  {RichText.asText(product.data.title)}
+                </p>
+              </article>
+            </Link>
           ))}
         </section>
       </main>
@@ -156,9 +161,6 @@ function Products({ products }) {
 }
 
 export async function getServerSideProps() {
-  const apiEndpoint = "https://stroka.cdn.prismic.io/api/v2";
-  const client = Prismic.client(apiEndpoint);
-
   const productsResponse = await client.query(
     Prismic.Predicates.at("document.type", "product"),
     { pageSize: 300 }
