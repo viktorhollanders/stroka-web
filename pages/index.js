@@ -1,9 +1,12 @@
+import { client } from "../prismic-configuration";
+import { RichText } from "prismic-reactjs";
 import Head from "next/head";
+import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import ProductBanner from "../components/ProductBanner";
 
-function Home() {
+function Home({ homeResponse }) {
+  console.log(homeResponse);
   return (
     <div>
       <Head>
@@ -28,7 +31,26 @@ function Home() {
           </div>
         </section>
 
-        <ProductBanner />
+        <section className="home-content">
+          <h1 className="anouncement__header">Tilkynningar</h1>
+          <div className="anouncement__wrapper">
+            <p className="anouncement__text">
+              {RichText.asText(homeResponse.data.anouncment)}
+            </p>
+          </div>
+
+          <h1 className="productsBanner__header">Vörur</h1>
+
+          <Link href="/products">
+            <div className="productBanner">
+              <img
+                className="productBanner__image"
+                src={homeResponse.data.product_banner_image.url}
+              />
+              <h1 className="productBanner__text">Sjá vöruúrval</h1>
+            </div>
+          </Link>
+        </section>
       </main>
       <Footer />
 
@@ -71,9 +93,58 @@ function Home() {
           text-align: center;
           margin: 0 0 16px 0;
         }
+
+        /* home main content */
+
+        .home-content {
+          margin: 92px 0;
+        }
+
+        .anouncement__header,
+        .productsBanner__header {
+          font-size: 24px;
+          font-weight: 600;
+          text-align: center;
+
+          margin: 0 0 32px 0;
+        }
+
+        .anouncement__wrapper {
+          margin-bottom: 92px;
+        }
+
+        .productBanner {
+          position: relative;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .productBanner__image {
+          height: 146px;
+          width: 343px;
+          border-radius: 15px;
+        }
+
+        .productBanner__text {
+          position: absolute;
+          font-size: 24px;
+          font-weight: 700;
+          color: #fff;
+        }
       `}</style>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const homeResponse = await client.getSingle("home");
+  return {
+    props: {
+      homeResponse,
+    },
+  };
 }
 
 export default Home;
