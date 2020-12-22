@@ -3,28 +3,27 @@ import { RichText } from "prismic-reactjs";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-export default function TermsOfService({ termsResponse }) {
-  const chapters = termsResponse.data.terms_of_service_chapters;
+export default function privacyPolicy({ policyResponse }) {
+  const chapters = policyResponse.data.privacy_policy_chapters;
+  console.log(policyResponse.data);
+
   return (
     <div>
       <Header />
       <main>
         <section className="hero">
           <div className="hero-logo__wrapper">
-            <h1 className="logo__text">Notenda skilmálar</h1>
+            <h1 className="logo__text">Lög og varnarþing</h1>
           </div>
         </section>
 
         <section className="legal">
-          <h1 className="company__info__heading">
-            {RichText.asText(termsResponse.data.company_info_title)}
-          </h1>
-          {RichText.render(termsResponse.data.company_info)}
           {chapters.map((chapter) => (
             <article className="chapter">
               <h1 className="legal__chapter__heading">
                 {RichText.asText(chapter.chapter_heading)}
               </h1>
+
               {RichText.render(chapter.chapter_text)}
             </article>
           ))}
@@ -63,10 +62,15 @@ export default function TermsOfService({ termsResponse }) {
           padding: 92px 16px;
         }
 
-        .company__info__heading,
         .legal__chapter__heading {
           margin: 52px 0 0 0;
           text-align: center;
+        }
+
+        @media screen and (min-width: 667px) {
+          .legal {
+            width: 667px;
+          }
         }
       `}</style>
     </div>
@@ -74,10 +78,10 @@ export default function TermsOfService({ termsResponse }) {
 }
 
 export async function getStaticProps() {
-  const termsResponse = await client.getSingle("terms_of_service");
+  const policyResponse = await client.getSingle("privacy_policy");
   return {
     props: {
-      termsResponse,
+      policyResponse,
     },
   };
 }
