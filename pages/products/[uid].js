@@ -3,7 +3,6 @@ import { RichText } from "prismic-reactjs";
 import Link from "next/link";
 
 export default function Product({ data }) {
-  console.log(data);
   return (
     <div>
       <section className="product">
