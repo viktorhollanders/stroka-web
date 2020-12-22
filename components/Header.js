@@ -6,17 +6,16 @@ export default function Nav() {
     <div>
       <header className="header">
         <Link href="/">
-          <h1 className="header__logo-text">STROKA</h1>
+          <a>
+            <h1 className="header__logo-text">STROKA</h1>
+          </a>
         </Link>
 
         <nav className="header-nav">
           <Link href="/products">
             <a className="header-nav__item">Vörur</a>
           </Link>
-          <Link href="/">
-            <a className="header-nav__item">Meðferðir</a>
-          </Link>
-          <Link href="/">
+          <Link href="/about">
             <a className="header-nav__item">Um Stroku</a>
           </Link>
         </nav>
@@ -53,7 +52,7 @@ export default function Nav() {
         .header-nav {
           display: flex;
           flex-direction: row;
-          justify-content: space-between;
+          justify-content: space-around;
 
           padding: 16px 0 9px 0;
         }
