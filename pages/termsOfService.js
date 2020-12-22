@@ -68,6 +68,12 @@ export default function TermsOfService({ termsResponse }) {
           margin: 52px 0 0 0;
           text-align: center;
         }
+
+        @media screen and (min-width: 667px) {
+          .legal {
+            width: 667px;
+          }
+        }
       `}</style>
     </div>
   );
