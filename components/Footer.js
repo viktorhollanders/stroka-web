@@ -45,7 +45,7 @@ export default function Footer() {
           </div>
           <div className="footer-info">
             <h3 className="footer-info__title">Skilmálar</h3>
-            <Link href="#">
+            <Link href="../termsOfService">
               <a className="footer-info__item">Notenda skilmálar</a>
             </Link>
           </div>
