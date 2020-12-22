@@ -6,7 +6,6 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 function Home({ homeResponse }) {
-  console.log(homeResponse);
   return (
     <div>
       <Head>

@@ -42,7 +42,7 @@ function Products({ products }) {
                 <p className="product__title">
                   {RichText.asText(product.data.title)}
                 </p>
-              </article>
+              </article> 
             </Link>
           ))}
         </section>
@@ -103,6 +103,8 @@ function Products({ products }) {
           display: grid;
           grid-template-columns: 1fr 1fr;
           grid-gap: 13px;
+
+          margin: 92px 0;
         }
 
         .product {
