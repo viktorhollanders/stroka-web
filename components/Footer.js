@@ -48,6 +48,9 @@ export default function Footer() {
             <Link href="../termsOfService">
               <a className="footer-info__item">Notenda skilmálar</a>
             </Link>
+            <Link href="../privacyPolicy">
+              <a className="footer-info__item">Lög og varnarþing</a>
+            </Link>
           </div>
         </div>
         <p className="footer__tax-info">
