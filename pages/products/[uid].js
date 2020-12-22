@@ -36,7 +36,7 @@ export default function Product({ data }) {
             <h1 className="price">{data.price} .kr</h1>
           </div>
           <p className="description__title">Lýsing</p>
-          <p>{RichText.asText(data.description)}</p>
+          {RichText.render(data.description)}
         </section>
       </section>
 
