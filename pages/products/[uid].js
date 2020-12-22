@@ -6,28 +6,31 @@ export default function Product({ data }) {
   console.log(data);
   return (
     <div>
-      <section>
-        <nav className="nav">
-          <Link href="../products">
-            <a className="nav__item">
-              <img
-                className="nav__item__icon"
-                src="/images/arrow-left.svg"
-                alt="back to products"
-              />
-              Til baka
-            </a>
-          </Link>
-        </nav>
-        <div className="productImage__container">
-          <img
-            className="productImage"
-            key={data.images[0].image.url}
-            alt={data.images[0].image.alt}
-            src={data.images[0].image.url}
-          />
-        </div>
-        <div className="productInfo__wrapper">
+      <section className="product">
+        <section className="container__navAndImgWrapper">
+          <nav className="nav">
+            <Link href="../products">
+              <a className="nav__item">
+                <img
+                  className="nav__item__icon"
+                  src="/images/arrow-left.svg"
+                  alt="back to products"
+                />
+                Til baka
+              </a>
+            </Link>
+          </nav>
+          <div className="productImage__wrapper">
+            <img
+              className="productImage"
+              key={data.images[0].image.url}
+              alt={data.images[0].image.alt}
+              src={data.images[0].image.url}
+            />
+          </div>
+        </section>
+
+        <section className="productInfo__wrapper">
           <h1 className="productInfo__title">{RichText.asText(data.title)}</h1>
           <div className="stockAndPrice__wrapper">
             <p className="stockStatus">Til á lager</p>
@@ -35,9 +38,14 @@ export default function Product({ data }) {
           </div>
           <p className="description__title">Lýsing</p>
           <p>{RichText.asText(data.description)}</p>
-        </div>
+        </section>
       </section>
+
       <style jsx>{`
+        .container__navAndImgWrapper {
+          display: flex;
+          flex-direction: column;
+        }
         .nav {
           padding: 92px 28px 0 28px;
         }
@@ -56,7 +64,11 @@ export default function Product({ data }) {
           margin-right: 10px;
         }
 
-        .productImage__container {
+        .product {
+          display: grid;
+        }
+
+        .productImage__wrapper {
           padding: 56px 0;
 
           display: flex;
@@ -94,6 +106,36 @@ export default function Product({ data }) {
         .description__title {
           font-weight: 600;
           text-align: left;
+        }
+
+        @media screen and (min-width: 900px) {
+          .product {
+            height: 100vh;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+          }
+
+          .nav {
+            padding: 48px 0 0 100px;
+          }
+
+          .container__navAndImgWrapper {
+            position: fixed;
+            height: 100%;
+            width: 50%;
+          }
+
+          .productInfo__wrapper {
+            position: relative;
+            left: 50vw;
+            height: 100%;
+          }
+
+          .productImage__wrapper {
+            height: 100%;
+            align-items: center;
+          }
         }
       `}</style>
     </div>
