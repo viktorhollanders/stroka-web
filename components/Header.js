@@ -12,7 +12,7 @@ export default function Nav() {
         </Link>
 
         <nav className="header-nav">
-          <Link href="/products">
+          <Link href="/catalog">
             <a className="header-nav__item">Vörur</a>
           </Link>
           <Link href="/about">
