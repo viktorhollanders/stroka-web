@@ -40,7 +40,7 @@ function Home({ homeResponse }) {
 
           <h1 className="productsBanner__header">Vörur</h1>
 
-          <Link href="/products">
+          <Link href="/catalog">
             <div className="productBanner">
               <img
                 className="productBanner__image"
