@@ -7,7 +7,14 @@ import Head from "next/head";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-function Products({ products }) {
+function Catalog({ products, categories }) {
+  const SORTED_CATEGORIES = categories.sort(function (a, b) {
+    const nameA = a.data.name;
+    const nameB = b.data.name;
+
+    return nameA < nameB ? -1 : 1;
+  });
+  console.log(products, categories)
   return (
     <div>
       <Head>
@@ -28,22 +35,33 @@ function Products({ products }) {
             <p>eða fá þær sent heim</p>
           </div>
         </div>
-
-        <section className="products">
-          {products.map((product) => (
-            <Link href={`/products/${product.uid}`}>
-              <article className="product" key={product.id}>
-                <img
-                  className="product__image"
-                  src={product.data.images[0].image.url}
-                  alt={product.data.title}
-                />
-                <h1 className="product__price">{product.data.price} .kr</h1>
-                <p className="product__title">
-                  {RichText.asText(product.data.title)}
-                </p>
-              </article> 
-            </Link>
+        <div className="sort"></div>
+        <section className="cataloge">
+          {SORTED_CATEGORIES.map((category) => (
+            <section className="products">
+              <h1>{category.data.name}</h1>
+              {products.map((product) => {
+                if (category.uid == product.data.category.slug) {
+                 return (
+                    <Link href={`/products/${product.uid}`} key={product.id}>
+                    <article className="product">
+                      <img
+                        className="product__image"
+                        src={product.data.images[0].image.url}
+                        alt={product.data.title}
+                      />
+                      <h1 className="product__price">
+                        {product.data.price} kr
+                      </h1>
+                      <p className="product__title">
+                        {RichText.asText(product.data.title)}
+                      </p>
+                    </article>
+                  </Link>
+                 )
+                }
+              })}
+            </section>
           ))}
         </section>
       </main>
@@ -165,14 +183,20 @@ function Products({ products }) {
 export async function getServerSideProps() {
   const productsResponse = await client.query(
     Prismic.Predicates.at("document.type", "product"),
-    { pageSize: 300 }
+    { pageSize: 600 }
+  );
+
+  const categoryResponse = await client.query(
+    Prismic.Predicates.at("document.type", "category"),
+    { pageSize: 10 }
   );
 
   return {
     props: {
       products: productsResponse.results,
+      categories: categoryResponse.results,
     },
   };
 }
 
-export default Products;
+export default Catalog;
