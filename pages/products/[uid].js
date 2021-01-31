@@ -8,7 +8,7 @@ export default function Product({ data }) {
       <section className="product">
         <section className="container__navAndImgWrapper">
           <nav className="nav">
-            <Link href="../products">
+            <Link href="../catalog">
               <a className="nav__item">
                 <img
                   className="nav__item__icon"
