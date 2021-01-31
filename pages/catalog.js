@@ -14,7 +14,7 @@ function Catalog({ products, categories }) {
 
     return nameA < nameB ? -1 : 1;
   });
-  console.log(products, categories)
+  console.log(products, categories);
   return (
     <div>
       <Head>
@@ -38,29 +38,31 @@ function Catalog({ products, categories }) {
         <div className="sort"></div>
         <section className="cataloge">
           {SORTED_CATEGORIES.map((category) => (
-            <section className="products">
+            <section className="catagory">
               <h1>{category.data.name}</h1>
-              {products.map((product) => {
-                if (category.uid == product.data.category.slug) {
-                 return (
-                    <Link href={`/products/${product.uid}`} key={product.id}>
-                    <article className="product">
-                      <img
-                        className="product__image"
-                        src={product.data.images[0].image.url}
-                        alt={product.data.title}
-                      />
-                      <h1 className="product__price">
-                        {product.data.price} kr
-                      </h1>
-                      <p className="product__title">
-                        {RichText.asText(product.data.title)}
-                      </p>
-                    </article>
-                  </Link>
-                 )
-                }
-              })}
+              <div className="products">
+                {products.map((product) => {
+                  if (category.uid == product.data.category.slug) {
+                    return (
+                      <Link href={`/products/${product.uid}`} key={product.id}>
+                        <article className="product">
+                          <img
+                            className="product__image"
+                            src={product.data.images[0].image.url}
+                            alt={product.data.title}
+                          />
+                          <h1 className="product__price">
+                            {product.data.price} kr
+                          </h1>
+                          <p className="product__title">
+                            {RichText.asText(product.data.title)}
+                          </p>
+                        </article>
+                      </Link>
+                    );
+                  }
+                })}
+              </div>
             </section>
           ))}
         </section>
@@ -115,14 +117,16 @@ function Catalog({ products, categories }) {
           margin: 0 0 16px 0;
         }
 
-        /* producs */
+        /* cataloge */
+
+        .catagory {
+          margin: 92px 0;
+        }
 
         .products {
           display: grid;
           grid-template-columns: 1fr 1fr;
           grid-gap: 13px;
-
-          margin: 92px 0;
         }
 
         .product {
