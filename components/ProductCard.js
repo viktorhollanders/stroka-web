@@ -20,14 +20,17 @@ function ProductCard({ props }) {
 
       <style jsx>{`
         .productCard {
+          width: 100%;
+          background-color: #fff;
+          border-radius: 15px;
+          box-shadow: 0px 4px 40px rgba(91, 46, 3, 0.11);
+          padding: 16px;
+
           display: flex;
           flex-direction: column;
           align-items: center;
-          background-color: #fff;
-          box-shadow: 0px 4px 40px rgba(91, 46, 3, 0.11);
-          border-radius: 15px;
-          padding: 16px;
         }
+
         .productCard__image {
           height: 101px;
           width: 101px;
