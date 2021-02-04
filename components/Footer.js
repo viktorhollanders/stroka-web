@@ -64,8 +64,9 @@ export default function Footer() {
           flex-direction: column;
           align-items: center;
 
+          background-color: #FEEBCF;
           padding: 60px 0;
-          background-color: #feebcf;
+          margin-top: 100px;
         }
 
         .footer-info__wrapper {
