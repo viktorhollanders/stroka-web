@@ -24,7 +24,7 @@ export default function Nav() {
       <style jsx>{`
         header {
           width: 100vw;
-          background-color: #fff;
+          background-color: #ffefe2;
           padding: 48px 24px 0px 24px;
           box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
 
