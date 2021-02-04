@@ -78,6 +78,7 @@ function Home({ homeResponse }) {
         }
 
         .logo__text {
+          font-size: 44px;
           font-family: "Waldorf-skrift";
           text-align: center;
           color: #5b2e03;

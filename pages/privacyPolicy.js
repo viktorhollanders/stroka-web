@@ -23,7 +23,6 @@ export default function privacyPolicy({ policyResponse }) {
               <h1 className="legal__chapter__heading">
                 {RichText.asText(chapter.chapter_heading)}
               </h1>
-
               {RichText.render(chapter.chapter_text)}
             </article>
           ))}
@@ -51,6 +50,7 @@ export default function privacyPolicy({ policyResponse }) {
         }
 
         .logo__text {
+          font-size: 44px;
           font-family: "Waldorf-skrift";
           text-align: center;
           color: #5b2e03;
