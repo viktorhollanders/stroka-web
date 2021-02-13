@@ -3,8 +3,8 @@ import Link from "next/link";
 
 function ProductCard({ props }) {
   return (
-    <div className="">
-      <Link href={`/products/${props.uid}`} key={props.id}>
+    <div key={props.id}>
+      <Link href={`/products/${props.uid}`}>
         <div className="productCard">
           <img
             className="productCard__image"
