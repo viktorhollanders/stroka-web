@@ -1,9 +1,12 @@
+import Prismic from "prismic-javascript";
 import { client } from "../prismic-configuration";
-import { RichText } from "prismic-reactjs";
+
 import Head from "next/head";
-import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+
+import { RichText } from "prismic-reactjs";
+import Link from "next/link";
 
 function Home({ homeResponse }) {
   return (
@@ -31,24 +34,25 @@ function Home({ homeResponse }) {
         </section>
 
         <section className="home-content">
-          <h1 className="anouncement__header">Tilkynningar</h1>
           <div className="anouncement__wrapper">
+            <h1 className="anouncement__header">Tilkynningar</h1>
             <p className="anouncement__text">
               {RichText.asText(homeResponse.data.anouncment)}
             </p>
           </div>
 
-          <h1 className="productsBanner__header">Vörur</h1>
+          <div className="productsBanner__wrapper">
+            <h1 className="productsBanner__header">Vörur</h1>
+            <p className="productsBanner__text">
+              {RichText.asText(homeResponse.data.product_banner_text)}
+            </p>
 
-          <Link href="/catalog">
-            <div className="productBanner">
-              <img
-                className="productBanner__image"
-                src={homeResponse.data.product_banner_image.url}
-              />
-              <h1 className="productBanner__text">Sjá vöruúrval</h1>
-            </div>
-          </Link>
+            <Link href="/catalog">
+              <button className="productBanner__button">
+                Fara í netverslun
+              </button>
+            </Link>
+          </div>
         </section>
       </main>
       <Footer />
@@ -109,40 +113,46 @@ function Home({ homeResponse }) {
           margin: 0 0 32px 0;
         }
 
-        .anouncement__wrapper {
-          margin-bottom: 92px;
-        }
-
-        .productBanner {
-          position: relative;
-
+        .anouncement__wrapper,
+        .productsBanner__wrapper,
+        .treatment__wrapper {
           display: flex;
-          justify-content: center;
+          flex-direction: column;
           align-items: center;
+
+          max-width: 700px;
+          margin: 0 16px 92px 16px;
         }
 
-        .productBanner__image {
-          height: 146px;
-          width: 343px;
+        .productBanner__button {
+          height: 66px;
+          width: 263px;
+          background-color: #5b2e03;
+          border: solid #5b2e03;
           border-radius: 15px;
-        }
 
-        .productBanner__text {
-          position: absolute;
-          font-size: 24px;
-          font-weight: 700;
+          font-size: 20px;
           color: #fff;
+          font-weight: 700;
+
+          margin-top: 56px;
         }
       `}</style>
     </div>
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const homeResponse = await client.getSingle("home");
+
+  const treatmentsResponse = await client.query(
+    Prismic.Predicates.at("document.type", "treatments")
+  );
+
   return {
     props: {
       homeResponse,
+      treatments: treatmentsResponse.results,
     },
   };
 }
