@@ -1,169 +1,160 @@
-import Head from "next/head";
+import Prismic from "prismic-javascript";
+import { client } from "../prismic-configuration";
 
-export default function Home() {
+import Head from "next/head";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
+import { RichText } from "prismic-reactjs";
+import Link from "next/link";
+
+function Home({ homeResponse }) {
   return (
     <div>
       <Head>
         <title>Stroka</title>
         <link rel="icon" href="/favicon.ico" />
-        <link
-          rel="preload"
-          href="/fonts/waldorfskrift.ttf"
-          as="font"
-          crossOrigin=""
-        />
       </Head>
-
+      <Header />
       <main>
-        <header>
-          <img className="logo" src="/images/logo.png" />
-          <h1 className="logo-text">STROKA</h1>
+        <section className="hero">
+          <div className="hero-logo__wrapper">
+            <img className="logo__image" src="/images/stroka-logo.svg" />
+            <h1 className="logo__text">STROKA</h1>
 
-          <div className="openingHouers">
-            <p>Opið</p>
-            <p>
-              Mánudag <strong>11–14</strong> og <strong>16–17</strong>
-            </p>
-            <p>
-              Miðvikudag <strong>11–14</strong>
-            </p>
-          </div>
-        </header>
-
-        <p className="text">
-          Við erum að setja nýja vefsíðu í loftið. Vef verslunin verður óvirk á
-          meðan en hér að neðan er hægt að finna helstu upplýsingar um Stroku.
-        </p>
-
-        <footer>
-          <div className="footer__contact-wrapper">
-            <div className="contact-item">
-              <h3 className="contact-title">Staðsetning</h3>
-              <p className="contact-text">Nýbýlavegi 8 (Portið),</p>
-              <p className="contact-text">200 Kópavogur</p>
-            </div>
-            <div className="contact-item">
-              <h3 className="contact-title">Hafa samband</h3>
-              <a href="tel:6993095">S: 699-3095</a>
-              <a href="mailto:stroka.mail@gmail.com">stroka.mail@gmail.com</a>
-            </div>
-            <div className="contact-item">
-              <h3 className="contact-title">Fylgstu með</h3>
-              <div className="contact-images">
-                <a href="https://www.facebook.com/stroka.is/" target="_blank">
-                  <img
-                    className="contact-image"
-                    src="/images/stroka facebook.png"
-                  />
-                </a>
-                <a href="https://www.instagram.com/stroka.is/" target="_blank">
-                  <img
-                    className="contact-image"
-                    src="/images/stroka instagram.png"
-                  />
-                </a>
-              </div>
+            <div className="hero-openingHouers_wrapper">
+              <p>
+                Mánudag <strong>11–14</strong> og <strong>16–17</strong>
+              </p>
+              <p>
+                Miðvikudag <strong>11–14</strong>
+              </p>
             </div>
           </div>
-          <p className="footer__tax-info">
-            Sigríður Þorbergsdóttir | Kt: 030572-5649 |banki: 0130-26-013087 |
-            Vsk númer: 131706
-          </p>
-        </footer>
-        <style jsx>{`
-          main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-          }
+        </section>
 
-          /* header */
+        <section className="home-content">
+          <div className="anouncement__wrapper">
+            <h1 className="anouncement__header">Tilkynningar</h1>
+            <p className="anouncement__text">
+              {RichText.asText(homeResponse.data.anouncment)}
+            </p>
+          </div>
 
-          header {
-            width: 100vw;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+          <div className="productsBanner__wrapper">
+            <h1 className="productsBanner__header">Vörur</h1>
+            <p className="productsBanner__text">
+              {RichText.asText(homeResponse.data.product_banner_text)}
+            </p>
 
-            padding: 112px 0 48px;
-          }
-
-          .logo {
-            height: 160px;
-            width: 160px;
-          }
-
-          .logo-text {
-            font-family: "Waldorf-skrift";
-            text-align: center;
-            color: #5b2e03;
-          }
-
-          .openingHouers {
-            margin-top: px;
-          }
-
-          .openingHouers p {
-            text-align: center;
-          }
-
-          .text {
-            max-width: 500px;
-            margin: 100px 16px;
-          }
-
-          /* footer */
-
-          footer {
-            color: #5b2e03;
-          }
-
-          .footer__contact-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-          }
-
-          .contact-item {
-            margin-bottom: 30px;
-            max-width: 200px;
-            text-align: center;
-          }
-
-          .contact-item a {
-            display: block;
-            margin-bottom: 22px;
-          }
-
-          .contact-title {
-            color: #5b2e03;
-          }
-
-          .contact-images {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-          }
-
-          .contact-image {
-            width: 32px;
-            height: 32px;
-          }
-
-          .footer__tax-info {
-            margin: 18px 16px;
-          }
-
-          @media screen and (min-width: 760px) {
-            .footer__contact-wrapper {
-              flex-direction: row;
-              flex-wrap: wrap;
-              align-items: flex-start;
-              justify-content: space-around;
-            }
-          }
-        `}</style>
+            <Link href="/catalog">
+              <button className="productBanner__button">
+                Fara í netverslun
+              </button>
+            </Link>
+          </div>
+        </section>
       </main>
+      <Footer />
+
+      <style jsx>{`
+        main {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          margin-top: 138px;
+        }
+
+        .hero {
+          padding-top: 100px;
+        }
+
+        .hero-logo__wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .logo__image {
+          height: 160px;
+          width: 160px;
+        }
+
+        .logo__text {
+          font-size: 44px;
+          font-family: "Waldorf-skrift";
+          text-align: center;
+          color: #5b2e03;
+          margin: 43px 0 0 0;
+        }
+
+        .hero-openingHouers_wrapper {
+          margin-top: 134px;
+        }
+
+        .hero-openingHouers_wrapper p {
+          text-align: center;
+          margin: 0 0 16px 0;
+        }
+
+        /* home main content */
+
+        .home-content {
+          margin: 92px 0;
+        }
+
+        .anouncement__header,
+        .productsBanner__header {
+          font-size: 24px;
+          font-weight: 600;
+          text-align: center;
+
+          margin: 0 0 32px 0;
+        }
+
+        .anouncement__wrapper,
+        .productsBanner__wrapper,
+        .treatment__wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          max-width: 700px;
+          margin: 0 16px 92px 16px;
+        }
+
+        .productBanner__button {
+          height: 66px;
+          width: 263px;
+          background-color: #5b2e03;
+          border: solid #5b2e03;
+          border-radius: 15px;
+
+          font-size: 20px;
+          color: #fff;
+          font-weight: 700;
+
+          margin-top: 56px;
+        }
+      `}</style>
     </div>
   );
 }
+
+export async function getServerSideProps() {
+  const homeResponse = await client.getSingle("home");
+
+  const treatmentsResponse = await client.query(
+    Prismic.Predicates.at("document.type", "treatments")
+  );
+
+  return {
+    props: {
+      homeResponse,
+      treatments: treatmentsResponse.results,
+    },
+  };
+}
+
+export default Home;
