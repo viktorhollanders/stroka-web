@@ -1,13 +1,11 @@
 import Prismic from "prismic-javascript";
+import React, { useState, useEffect } from "react";
 import { client } from "../prismic-configuration";
 
 import Head from "next/head";
 import Header from "../components/Header";
 import ProductCard from "../components/ProductCard";
 import Footer from "../components/Footer";
-
-import { RichText } from "prismic-reactjs";
-import Link from "next/link";
 
 function Catalog({ products, categories }) {
   const SORTED_CATEGORIES = categories.sort(function (a, b) {
@@ -17,6 +15,9 @@ function Catalog({ products, categories }) {
     return nameA < nameB ? -1 : 1;
   });
 
+  const [selectedCategory, setSelectedCategory] = useState(undefined);
+
+  console.log(products[0]);
   return (
     <div>
       <Head>
@@ -32,34 +33,65 @@ function Catalog({ products, categories }) {
             <h1 className="logo__text">Products</h1>
           </div>
 
-          <div className="hero-products__wrapper">
+          <div className="hero-catalog__wrapper">
             <p>Hægt er að ná í vörur í búðina</p>
             <p>eða fá þær sent heim</p>
           </div>
         </div>
-        <div className="sort">
-          <h1>Flokka eftir</h1>
-          <div>
-            {SORTED_CATEGORIES.map((category) => (
-              <p key={category.id}>{category.data.name}</p>
+        <div className="catalog-sort__wrapper">
+          <h1 className="catalog-sort__title">Flokka eftir</h1>
+          <div className="catalog-sort__buttons">
+            <div
+              onClick={() => setSelectedCategory(undefined)}
+              className={
+                !selectedCategory
+                  ? "catalog-sort__button catalog-sort__button--active"
+                  : "catalog-sort__button"
+              }
+            >
+              <span>Allar vörur</span>
+            </div>
+            {SORTED_CATEGORIES.map((category) => {
+              const selectedClass =
+                selectedCategory == category
+                  ? "catalog-sort__button catalog-sort__button--active"
+                  : "catalog-sort__button";
+
+              return (
+                <div
+                  className={selectedClass}
+                  key={category.id}
+                  onClick={() => setSelectedCategory(category)}
+                >
+                  <span>{category.data.name}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="cataloge">
+          <div className="catagory">
+            {SORTED_CATEGORIES.filter((category) =>
+              selectedCategory ? selectedCategory.uid === category.uid : true
+            ).map((category) => (
+              <div className="productSection__wrapper">
+                <h1 key={category.uid}>{category.data.name}</h1>
+                <div className="products">
+                  {products
+                    .filter(
+                      (product) => category.uid == product.data.category.slug
+                    )
+                    .map((product) => {
+                      return <ProductCard props={product} />;
+                    })}
+                </div>
+              </div>
             ))}
           </div>
         </div>
-        <div className="cataloge">
-          {SORTED_CATEGORIES.map((category) => (
-            <section className="catagory">
-              <h1 key={category.id}>{category.data.name}</h1>
-              <div className="products">
-                {products.map((product) => {
-                  if (category.uid == product.data.category.slug) {
-                    return <ProductCard props={product} />;
-                  }
-                })}
-              </div>
-            </section>
-          ))}
-        </div>
       </main>
+
       <Footer />
       <style jsx>{`
         main {
@@ -76,7 +108,7 @@ function Catalog({ products, categories }) {
           flex-direction: column;
           align-items: center;
         }
-        .hero-products__wrapper {
+        .hero-catalog__wrapper {
           font-size: 16px;
           margin: 0 0 16px 0;
           display: flex;
@@ -88,18 +120,56 @@ function Catalog({ products, categories }) {
           width: 160px;
         }
         .logo__text {
+          font-size: 44px;
           font-family: "Waldorf-skrift";
           text-align: center;
           color: #5b2e03;
           margin: 43px 0 0 0;
         }
-        .hero-products__wrapper {
+        .hero-catalog__wrapper {
           margin-top: 134px;
         }
-        .hero-products__wrapper p {
+        .hero-catalog__wrapper p {
           text-align: center;
           margin: 0 0 16px 0;
         }
+
+        /* catalog sort */
+        .catalog-sort__wrapper {
+          margin-top: 92px;
+        }
+
+        .catalog-sort__title {
+          font-size: 24px;
+          font-weight: 600;
+          text-align: center;
+          margin: 0 0 32px 0;
+        }
+
+        .catalog-sort__buttons {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          padding: 0 16px;
+        }
+
+        .catalog-sort__button {
+          background-color: #f4f4f4;
+          border-radius: 5px;
+          font-weight: 600;
+          color: #7b7b7b;
+
+          padding: 6px 8px;
+          margin: 0 18px 18px 0;
+
+          cursor: pointer;
+        }
+
+        .catalog-sort__button--active {
+          background-color: #ffb800;
+          color: black;
+        }
+
         /* cataloge */
         .catagory {
           margin: 92px 0;
