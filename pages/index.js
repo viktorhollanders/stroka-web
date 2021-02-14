@@ -3,12 +3,14 @@ import { client } from "../prismic-configuration";
 
 import Head from "next/head";
 import Header from "../components/Header";
+import TreatmentCard from "../components/TreatmentCard"
 import Footer from "../components/Footer";
 
 import { RichText } from "prismic-reactjs";
 import Link from "next/link";
 
-function Home({ homeResponse }) {
+function Home({ homeResponse, treatments }) {
+  console.log(treatments);
   return (
     <div>
       <Head>
@@ -35,14 +37,23 @@ function Home({ homeResponse }) {
 
         <section className="home-content">
           <div className="anouncement__wrapper">
-            <h1 className="anouncement__header">Tilkynningar</h1>
+            <h1 className="anouncement__titile">Tilkynningar</h1>
             <p className="anouncement__text">
               {RichText.asText(homeResponse.data.anouncment)}
             </p>
           </div>
 
+          <div className="treatment__wrapper">
+            <h1 className="anouncement__titile">Meðferðir</h1>
+            <div className="treatmentCards">
+              {treatments.map((treatment) => {
+                return <TreatmentCard props={treatment} />;
+              })}
+            </div>
+          </div>
+
           <div className="productsBanner__wrapper">
-            <h1 className="productsBanner__header">Vörur</h1>
+            <h1 className="productsBanner__title">Vörur</h1>
             <p className="productsBanner__text">
               {RichText.asText(homeResponse.data.product_banner_text)}
             </p>
@@ -104,8 +115,9 @@ function Home({ homeResponse }) {
           margin: 92px 0;
         }
 
-        .anouncement__header,
-        .productsBanner__header {
+        .anouncement__titile,
+        .productsBanner__title,
+        .anouncement__titile {
           font-size: 24px;
           font-weight: 600;
           text-align: center;
