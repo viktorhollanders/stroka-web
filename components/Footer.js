@@ -30,6 +30,7 @@ export default function Footer() {
               <a
                 className="social-media__link"
                 href="https://www.facebook.com/stroka.is"
+                target="_blank"
               >
                 <img
                   className="social-media__icon"
@@ -40,6 +41,7 @@ export default function Footer() {
               <a
                 className="social-media__link"
                 href="https://www.instagram.com/stroka.is/"
+                target="_blank"
               >
                 <img
                   className="social-media__icon"
