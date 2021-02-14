@@ -3,7 +3,7 @@ import Link from "next/link";
 
 function ProductCard({ props }) {
   return (
-    <div key={props.id}>
+    <div>
       <Link href={`/products/${props.uid}`}>
         <div className="productCard">
           <img

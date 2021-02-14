@@ -47,7 +47,7 @@ function Home({ homeResponse, treatments }) {
             <h1 className="treatment__titile">Meðferðir</h1>
             <div className="treatmentCards">
               {treatments.map((treatment) => {
-                return <TreatmentCard props={treatment} />;
+                return <TreatmentCard props={treatment} key={treatment.id} />;
               })}
             </div>
           </div>
