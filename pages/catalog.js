@@ -88,6 +88,7 @@ function Catalog({ products, categories }) {
               </div>
             ))}
           </div>
+          <p className="endOfCataloge">Endi á vörulista</p>
         </div>
       </main>
 
@@ -178,6 +179,11 @@ function Catalog({ products, categories }) {
           display: grid;
           grid-template-columns: 1fr 1fr;
           grid-gap: 13px;
+        }
+
+        .endOfCataloge {
+          text-align: center;
+          color: #999999;
         }
 
         @media screen and (min-width: 500px) {
