@@ -27,14 +27,20 @@ export default function Footer() {
           <div className="footer-info">
             <h3 className="footer-info__title">Fylgstu með</h3>
             <div className="social-media">
-              <a className="social-media__link" href="#">
+              <a
+                className="social-media__link"
+                href="https://www.facebook.com/stroka.is"
+              >
                 <img
                   className="social-media__icon"
                   src="/images/facebook-logo.svg"
                   alt="facebook icon"
                 />
               </a>
-              <a className="social-media__link" href="#">
+              <a
+                className="social-media__link"
+                href="https://www.instagram.com/stroka.is/"
+              >
                 <img
                   className="social-media__icon"
                   src="/images/instagram-logo.svg"
