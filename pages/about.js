@@ -28,7 +28,6 @@ function About({ aboutResponse }) {
         <img
           className="about-owner-image"
           src={aboutResponse.data.about_owner_image.url}
-          alt="owner photo"
         />
 
         <h1 className="about-owner-title">
