@@ -3,7 +3,7 @@ import { client } from "../prismic-configuration";
 
 import Head from "next/head";
 import Header from "../components/Header";
-import TreatmentCard from "../components/TreatmentCard"
+import TreatmentCard from "../components/TreatmentCard";
 import Footer from "../components/Footer";
 
 import { RichText } from "prismic-reactjs";
@@ -44,7 +44,7 @@ function Home({ homeResponse, treatments }) {
           </div>
 
           <div className="treatment__wrapper">
-            <h1 className="anouncement__titile">Meðferðir</h1>
+            <h1 className="treatment__titile">Meðferðir</h1>
             <div className="treatmentCards">
               {treatments.map((treatment) => {
                 return <TreatmentCard props={treatment} />;
@@ -117,7 +117,7 @@ function Home({ homeResponse, treatments }) {
 
         .anouncement__titile,
         .productsBanner__title,
-        .anouncement__titile {
+        .treatment__titile {
           font-size: 24px;
           font-weight: 600;
           text-align: center;
@@ -148,6 +148,24 @@ function Home({ homeResponse, treatments }) {
           font-weight: 700;
 
           margin-top: 56px;
+        }
+
+        .treatmentCards {
+          display: grid;
+        }
+
+        @media screen and (min-width: 770px) {
+          .treatmentCards {
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 32px;
+          }
+        }
+
+        @media screen and (min-width: 1000px) {
+          .treatmentCards {
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: 32px;
+          }
         }
       `}</style>
     </div>

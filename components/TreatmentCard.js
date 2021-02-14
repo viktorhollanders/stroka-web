@@ -4,7 +4,7 @@ import Link from "next/link";
 function TreatmentCard({ props }) {
   return (
     <div>
-      <Link href="#">
+      <Link href={`/treatments/${props.uid}`}>
         <div className="treatmentCard">
           <img
             className="treatmentCard__image"
