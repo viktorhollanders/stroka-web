@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 
 export default function TermsOfService({ termsResponse }) {
   const chapters = termsResponse.data.terms_of_service_chapters;
+
   return (
     <div>
       <Header />
@@ -20,8 +21,8 @@ export default function TermsOfService({ termsResponse }) {
             {RichText.asText(termsResponse.data.company_info_title)}
           </h1>
           {RichText.render(termsResponse.data.company_info)}
-          {chapters.map((chapter) => (
-            <article className="chapter">
+          {chapters.map((chapter, index) => (
+            <article className="chapter" key={index}>
               <h1 className="legal__chapter__heading">
                 {RichText.asText(chapter.chapter_heading)}
               </h1>
@@ -63,10 +64,13 @@ export default function TermsOfService({ termsResponse }) {
           padding: 92px 16px;
         }
 
-        .company__info__heading,
-        .legal__chapter__heading {
+        .company__info__heading {
           margin: 52px 0 0 0;
           text-align: center;
+        }
+
+        .legal__chapter__heading {
+          margin: 52px 0 0 0;
         }
 
         @media screen and (min-width: 667px) {

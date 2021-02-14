@@ -5,7 +5,6 @@ import Footer from "../components/Footer";
 
 export default function privacyPolicy({ policyResponse }) {
   const chapters = policyResponse.data.privacy_policy_chapters;
-  console.log(policyResponse.data);
 
   return (
     <div>
@@ -18,8 +17,8 @@ export default function privacyPolicy({ policyResponse }) {
         </section>
 
         <section className="legal">
-          {chapters.map((chapter) => (
-            <article className="chapter">
+          {chapters.map((chapter, index) => (
+            <article className="chapter" key={index}>
               <h1 className="legal__chapter__heading">
                 {RichText.asText(chapter.chapter_heading)}
               </h1>
@@ -64,7 +63,6 @@ export default function privacyPolicy({ policyResponse }) {
 
         .legal__chapter__heading {
           margin: 52px 0 0 0;
-          text-align: center;
         }
 
         @media screen and (min-width: 667px) {
