@@ -17,7 +17,6 @@ function Catalog({ products, categories }) {
 
   const [selectedCategory, setSelectedCategory] = useState(undefined);
 
-  console.log(products[0]);
   return (
     <div>
       <Head>
@@ -80,7 +79,7 @@ function Catalog({ products, categories }) {
                 <div className="products">
                   {products
                     .filter(
-                      (product) => category.uid == product.data.category.slug
+                      (product) => category.uid == product.data.category.uid
                     )
                     .map((product) => {
                       return <ProductCard props={product} />;
