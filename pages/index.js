@@ -10,7 +10,6 @@ import { RichText } from "prismic-reactjs";
 import Link from "next/link";
 
 function Home({ homeResponse, treatments }) {
-  console.log(treatments);
   return (
     <div>
       <Head>
