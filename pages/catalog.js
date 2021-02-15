@@ -1,5 +1,5 @@
 import Prismic from "prismic-javascript";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { client } from "../prismic-configuration";
 
 import Head from "next/head";
@@ -59,8 +59,8 @@ function Catalog({ products, categories }) {
               return (
                 <div
                   className={selectedClass}
-                  key={category.id}
                   onClick={() => setSelectedCategory(category)}
+                  key={category.id}
                 >
                   <span>{category.data.name}</span>
                 </div>
@@ -74,15 +74,15 @@ function Catalog({ products, categories }) {
             {SORTED_CATEGORIES.filter((category) =>
               selectedCategory ? selectedCategory.uid === category.uid : true
             ).map((category) => (
-              <div className="productSection__wrapper">
-                <h1 key={category.uid}>{category.data.name}</h1>
+              <div className="productSection__wrapper" key={category.id}>
+                <h1>{category.data.name}</h1>
                 <div className="products">
                   {products
                     .filter(
                       (product) => category.uid == product.data.category.uid
                     )
                     .map((product) => {
-                      return <ProductCard props={product} />;
+                      return <ProductCard props={product} key={product.id} />;
                     })}
                 </div>
               </div>
