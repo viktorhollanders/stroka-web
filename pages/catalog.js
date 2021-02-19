@@ -29,7 +29,7 @@ function Catalog({ products, categories }) {
         <div className="hero">
           <div className="hero-logo__wrapper">
             <img className="logo__image" src="/images/products-logo.svg" />
-            <h1 className="logo__text">Products</h1>
+            <h1 className="logo__text">Vörur</h1>
           </div>
 
           <div className="hero-catalog__wrapper">
