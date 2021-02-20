@@ -134,7 +134,8 @@ function Catalog({ products, categories, catalog }) {
 
         .hero-catalog__wrapper {
           margin: 90px 16px 0 16px;
-          max-width: 700px;
+          max-width: 280px;
+          text-align: center;
         }
 
         .hero-catalog__wrapper p {
