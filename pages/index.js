@@ -27,9 +27,9 @@ function Home({ homeResponse, treatments }) {
 
         <div className="businessHours">
           <div className="businessHours__open">
-            {homeResponse.data.business_hours.map((open, index) => (
+            {homeResponse.data.business_hours.map(({ day }, index) => (
               <p className="openingHhouers" key={index}>
-                {open.day}
+                {day}
               </p>
             ))}
           </div>
