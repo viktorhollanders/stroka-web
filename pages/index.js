@@ -18,23 +18,24 @@ function Home({ homeResponse, treatments }) {
       </Head>
       <Header />
       <main>
-        <section className="hero">
+        <div className="hero">
           <div className="hero-logo__wrapper">
             <img className="logo__image" src="/images/stroka-logo.svg" />
             <h1 className="logo__text">STROKA</h1>
-
-            <div className="hero-openingHouers_wrapper">
-              <p>
-                Mánudag <strong>11–14</strong> og <strong>16–17</strong>
-              </p>
-              <p>
-                Miðvikudag <strong>11–14</strong>
-              </p>
-            </div>
           </div>
-        </section>
+        </div>
 
-        <section className="home-content">
+        <div className="businessHours">
+          <div className="businessHours__open">
+            {homeResponse.data.business_hours.map((open, index) => (
+              <p className="openingHhouers" key={index}>
+                {open.day}
+              </p>
+            ))}
+          </div>
+        </div>
+
+        <div className="home-content">
           <div className="anouncement__wrapper">
             <h1 className="anouncement__titile">Tilkynningar</h1>
             <p className="anouncement__text">
@@ -63,7 +64,7 @@ function Home({ homeResponse, treatments }) {
               </button>
             </Link>
           </div>
-        </section>
+        </div>
       </main>
       <Footer />
 
@@ -99,13 +100,23 @@ function Home({ homeResponse, treatments }) {
           margin: 43px 0 0 0;
         }
 
-        .hero-openingHouers_wrapper {
-          margin-top: 134px;
+        .businessHours {
+          margin-top: 110px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
 
-        .hero-openingHouers_wrapper p {
+        .businessHours__open {
+          display: flex;
+          flex-direction: column;
+          align: items: center;
+        }
+
+        .businessHours__open p {
+          margin: 0 0 12px 0;
           text-align: center;
-          margin: 0 0 16px 0;
+          font-weight: 600;
         }
 
         /* home main content */
@@ -157,6 +168,18 @@ function Home({ homeResponse, treatments }) {
           .treatmentCards {
             grid-template-columns: 1fr 1fr;
             grid-gap: 32px;
+          }
+
+          .businessHours__open {
+            display: flex;
+            flex-direction: row;
+            align: items: center;
+          }
+
+          .businessHours__open p {
+            margin-bottom: 0;
+            margin-left: 12px;
+            text-align: center;
           }
         }
 
