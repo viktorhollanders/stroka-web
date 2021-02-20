@@ -7,7 +7,9 @@ import Header from "../components/Header";
 import ProductCard from "../components/ProductCard";
 import Footer from "../components/Footer";
 
-function Catalog({ products, categories }) {
+import { RichText } from "prismic-reactjs";
+
+function Catalog({ products, categories, catalog }) {
   const SORTED_CATEGORIES = categories.sort(function (a, b) {
     const nameA = a.data.name;
     const nameB = b.data.name;
@@ -31,12 +33,14 @@ function Catalog({ products, categories }) {
             <img className="logo__image" src="/images/products-logo.svg" />
             <h1 className="logo__text">Vörur</h1>
           </div>
-
-          <div className="hero-catalog__wrapper">
-            <p>Hægt er að ná í vörur í búðina</p>
-            <p>eða fá þær sent heim</p>
-          </div>
         </div>
+
+        <div className="hero-catalog__wrapper">
+          {catalog.map((catalog, index) => (
+            <p key={index}>{RichText.asText(catalog.data.catalog_about)}</p>
+          ))}
+        </div>
+
         <div className="catalog-sort__wrapper">
           <h1 className="catalog-sort__title">Flokka eftir</h1>
           <div className="catalog-sort__buttons">
@@ -100,25 +104,24 @@ function Catalog({ products, categories }) {
           align-items: center;
           margin-top: 138px;
         }
+
+        /* hero */
+
         .hero {
           padding-top: 134px;
         }
+
         .hero-logo__wrapper {
           display: flex;
           flex-direction: column;
           align-items: center;
         }
-        .hero-catalog__wrapper {
-          font-size: 16px;
-          margin: 0 0 16px 0;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
+
         .logo__image {
           height: 160px;
           width: 160px;
         }
+
         .logo__text {
           font-size: 44px;
           font-family: "Waldorf-skrift";
@@ -126,12 +129,16 @@ function Catalog({ products, categories }) {
           color: #5b2e03;
           margin: 43px 0 0 0;
         }
+
+        /* hero catalog wrapper */
+
         .hero-catalog__wrapper {
-          margin-top: 134px;
+          margin: 90px 16px 0 16px;
+          max-width: 700px;
         }
+
         .hero-catalog__wrapper p {
-          text-align: center;
-          margin: 0 0 16px 0;
+          margin: 0;
         }
 
         /* catalog sort */
@@ -219,10 +226,15 @@ export async function getServerSideProps() {
     { pageSize: 10 }
   );
 
+  const catalogResponse = await client.query(
+    Prismic.Predicates.at("document.type", "catalog")
+  );
+
   return {
     props: {
       products: productsResponse.results,
       categories: categoryResponse.results,
+      catalog: catalogResponse.results,
     },
   };
 }
