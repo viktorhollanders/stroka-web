@@ -11,10 +11,7 @@ import { RichText } from "prismic-reactjs";
 
 function Catalog({ products, categories, catalog }) {
   const SORTED_CATEGORIES = categories.sort(function (a, b) {
-    const nameA = a.data.name;
-    const nameB = b.data.name;
-
-    return nameA < nameB ? -1 : 1;
+    return a.data.name < b.data.name ? -1 : 1;
   });
 
   const [selectedCategory, setSelectedCategory] = useState(undefined);
@@ -39,6 +36,10 @@ function Catalog({ products, categories, catalog }) {
           {catalog.map((catalog, index) => (
             <p key={index}>{RichText.asText(catalog.data.catalog_about)}</p>
           ))}
+
+          <a href="mailto:stroka.mail@gmail.com">
+            <button className="contactUs__button">Sendu fyrirspurn</button>
+          </a>
         </div>
 
         <div className="catalog-sort__wrapper">
@@ -142,6 +143,20 @@ function Catalog({ products, categories, catalog }) {
           margin: 0;
         }
 
+        .contactUs__button {
+          height: 50px;
+          width: 200px;
+          background-color: #5b2e03;
+          border: solid #5b2e03;
+          border-radius: 15px;
+
+          font-size: 16px;
+          color: #fff;
+          font-weight: 700;
+
+          margin-top: 56px;
+        }
+
         /* catalog sort */
         .catalog-sort__wrapper {
           margin-top: 92px;
@@ -219,12 +234,16 @@ function Catalog({ products, categories, catalog }) {
 export async function getServerSideProps() {
   const productsResponse = await client.query(
     Prismic.Predicates.at("document.type", "product"),
-    { pageSize: 600 }
+    {
+      pageSize: 600,
+    }
   );
 
   const categoryResponse = await client.query(
     Prismic.Predicates.at("document.type", "category"),
-    { pageSize: 10 }
+    {
+      pageSize: 10,
+    }
   );
 
   const catalogResponse = await client.query(
