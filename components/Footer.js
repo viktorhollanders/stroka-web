@@ -8,7 +8,7 @@ export default function Footer() {
           <div className="footer-info">
             <h3 className="footer-info__title">Hér erum við</h3>
             <a className="footer-info__item" href="">
-              Nýbýlavegi 8 (Portið),
+              Hvannhólma 24,
             </a>
             <p className="footer-info__item">200 Kópavogur</p>
           </div>
